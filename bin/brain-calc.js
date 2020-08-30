@@ -7,7 +7,7 @@ import {
   getAnswer,
   showErrorMessages,
 } from '../src/games/common.js';
-import { showRules, answers } from '../src/games/brain-even.js';
+import { showRules, operators } from '../src/games/brain-calc.js';
 
 const game = () => {
   const name = greeting();
@@ -21,13 +21,17 @@ const game = () => {
       return;
     }
 
-    const randomNumber = getRandomNumber(0, 100);
-    const correctAnswer = randomNumber % 2 === 0 ? answers.yes : answers.no;
+    const num1 = getRandomNumber(1, 10);
+    const num2 = getRandomNumber(1, 10);
+    const operator = operators[getRandomNumber(0, 3)];
 
-    askQuestion(randomNumber);
+    // eslint-disable-next-line no-eval
+    const correctAnswer = eval(num1 + operator + num2);
+
+    askQuestion(`${num1} ${operator} ${num2}`);
     const answer = getAnswer();
 
-    if (answer === correctAnswer) {
+    if (answer === String(correctAnswer)) {
       correctAnswers += 1;
       console.log('Correct!');
     } else {
