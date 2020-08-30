@@ -7,7 +7,7 @@ import {
   getAnswer,
   showErrorMessages,
 } from '../src/games/common.js';
-import { showRules, operators } from '../src/games/brain-calc.js';
+import { showRules, operators, getCorrectAnswer } from '../src/games/brain-calc.js';
 
 const game = () => {
   const name = greeting();
@@ -21,12 +21,10 @@ const game = () => {
       return;
     }
 
-    const num1 = getRandomNumber(1, 10);
-    const num2 = getRandomNumber(1, 10);
+    const num1 = getRandomNumber(1, 100);
+    const num2 = getRandomNumber(1, 100);
     const operator = operators[getRandomNumber(0, 3)];
-
-    // eslint-disable-next-line no-eval
-    const correctAnswer = eval(num1 + operator + num2);
+    const correctAnswer = getCorrectAnswer(num1, num2, operator);
 
     askQuestion(`${num1} ${operator} ${num2}`);
     const answer = getAnswer();
