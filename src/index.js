@@ -1,7 +1,8 @@
 import readlineSync from 'readline-sync';
-import { LEVELS_COUNT } from './constants.js';
 
-const game = (getRoundInfo, rules) => {
+const LEVELS_COUNT = 3;
+
+const runGame = (getRoundInfo, description) => {
   /**
    * Greetings
    */
@@ -13,7 +14,7 @@ const game = (getRoundInfo, rules) => {
   /**
    * Rules
    */
-  console.log(rules);
+  console.log(description);
 
   /**
    * Round mechanic
@@ -49,4 +50,4 @@ const game = (getRoundInfo, rules) => {
   inner(1);
 };
 
-export default game;
+export default runGame;

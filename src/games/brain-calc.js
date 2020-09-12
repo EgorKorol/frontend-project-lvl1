@@ -1,7 +1,7 @@
 import getRandomNumber from '../utils.js';
-import game from '../index.js';
+import runGame from '../index.js';
 
-const rules = 'What is the result of the expression?';
+const description = 'What is the result of the expression?';
 
 const operators = ['+', '-', '*'];
 
@@ -14,20 +14,20 @@ const getCorrectAnswer = (num1, num2, operator) => {
     case '*':
       return num1 * num2;
     default:
-      return 0;
+      throw new Error(`Unknown operator: '${operator}'!`);
   }
 };
 
-const task = () => {
+const generateRoundData = () => {
   const num1 = getRandomNumber(1, 100);
   const num2 = getRandomNumber(1, 100);
-  const operator = operators[getRandomNumber(0, 3)];
+  const operator = operators[getRandomNumber(0, operators.length)];
   const question = `${num1} ${operator} ${num2}`;
-  const answer = `${getCorrectAnswer(num1, num2, operator)}`;
+  const answer = getCorrectAnswer(num1, num2, operator).toString();
 
   return [question, answer];
 };
 
-const playGame = () => game(task, rules);
+const playGame = () => runGame(generateRoundData, description);
 
 export default playGame;

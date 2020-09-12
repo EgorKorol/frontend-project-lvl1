@@ -1,20 +1,24 @@
 import getRandomNumber from '../utils.js';
-import game from '../index.js';
-import { ANSWERS } from '../constants.js';
+import runGame from '../index.js';
 
-const rules = `Answer "${ANSWERS.yes}" if the number is even, otherwise answer "${ANSWERS.no}".`;
+const ANSWERS = {
+  yes: 'yes',
+  no: 'no',
+};
+
+const description = `Answer "${ANSWERS.yes}" if the number is even, otherwise answer "${ANSWERS.no}".`;
 
 const isEven = (number) => (number % 2 === 0);
 
 const getCorrectAnswer = (num) => (isEven(num) ? ANSWERS.yes : ANSWERS.no);
 
-const task = () => {
+const generateRoundData = () => {
   const question = getRandomNumber(0, 100);
   const answer = getCorrectAnswer(question);
 
   return [question, answer];
 };
 
-const playGame = () => game(task, rules);
+const playGame = () => runGame(generateRoundData, description);
 
 export default playGame;
